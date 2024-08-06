@@ -33,9 +33,6 @@ const App = () => {
   return (
     <div className="mt-20 min-h-screen min-w-screen text-center flex justify-center items-center">
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-yellow-500 mb-4">
-          प्रतियोगिता प्रतिभागी संख्या
-        </h1>
         {combinedData ? (
           <CompetitionDashboard data={combinedData} />
         ) : (
