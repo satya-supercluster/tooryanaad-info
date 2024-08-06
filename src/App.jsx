@@ -1,33 +1,45 @@
 import React, { useState, useEffect } from "react";
+import CompetitionDashboard from "./New";
 
 const App = () => {
-  const [count, setCount] = useState(null);
+  const [combinedData, setCombinedData] = useState(null);
 
   useEffect(() => {
-    const fetchCount = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_SITE}/A_Count`);
-        if (!response.ok) {
+        const [responseT, responseTG] = await Promise.all([
+          fetch(`${import.meta.env.VITE_BACKEND_SITE}/T`),
+          fetch(`${import.meta.env.VITE_BACKEND_SITE}/TG`),
+        ]);
+
+        if (!responseT.ok || !responseTG.ok) {
           throw new Error("Network response was not ok");
         }
-        const data = await response.json();
-        setCount(data.count);
+
+        const dataT = await responseT.json();
+        const dataTG = await responseTG.json();
+
+        // Combine the data from both endpoints
+        const combined = [...dataT.data, ...dataTG.data];
+        setCombinedData(combined);
       } catch (error) {
-        console.error("Error fetching count:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
-    fetchCount();
+    fetchData();
   }, []);
 
   return (
-    <div className="min-h-screen min-w-screen text-center flex justify-center items-center">
+    <div className="mt-20 min-h-screen min-w-screen text-center flex justify-center items-center">
       <div className="text-center">
-        <h1 className="text-2xl font-bold mb-4">Document Count</h1>
-        {count !== null ? (
-          <p className="text-xl">Total count: {count}</p>
+        <h1 className="text-2xl font-bold text-yellow-500 mb-4">
+          प्रतियोगिता प्रतिभागी संख्या
+        </h1>
+        {combinedData ? (
+          <CompetitionDashboard data={combinedData} />
         ) : (
-          <p className="text-xl">Loading count...</p>
+          <p>Loading...</p>
         )}
       </div>
     </div>
