@@ -31,7 +31,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="mt-20 min-h-screen min-w-screen text-center flex justify-center items-center">
+    <div className="my-5 min-h-screen min-w-screen text-center flex justify-center items-center ">
       <div className="text-center">
         {combinedData ? (
           <CompetitionDashboard data={combinedData} />

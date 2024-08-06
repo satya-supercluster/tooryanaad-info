@@ -39,7 +39,7 @@ const CompetitionDashboard = ({ data }) => {
   }, [data]);
 
   return (
-    <div className="p-4 bg-slate-300 min-h-screen rounded-lg">
+    <div className="p-4 bg-slate-300 min-h-screen rounded-lg border-2 border-yellow-500">
       <h1 className="text-3xl font-bold mb-6 text-center text-blue-800">
         प्रतियोगिता प्रतिभागी संख्या
       </h1>
