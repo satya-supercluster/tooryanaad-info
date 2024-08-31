@@ -179,7 +179,7 @@ const CompetitionDashboard = ({ data, count, setCount }) => {
             ))}
           </div>
         </div>
-        <AnimatedDiv className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
+        <AnimatedDiv className="bg-white overflow-x-hidden rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
           <h2 className="text-xl font-semibold mb-4 text-center text-blue-700">
             प्रतियोगिता वितरण
           </h2>
