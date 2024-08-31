@@ -3,7 +3,7 @@ import CompetitionDashboard from "./New";
 
 const App = () => {
   const [combinedData, setCombinedData] = useState(null);
-
+  const [count, setCount] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,7 +34,7 @@ const App = () => {
     <div className="my-5 min-h-screen min-w-screen text-center flex justify-center items-center ">
       <div className="text-center">
         {combinedData ? (
-          <CompetitionDashboard data={combinedData} />
+          <CompetitionDashboard data={combinedData} count={count} setCount={setCount} />
         ) : (
           <p>Loading...</p>
         )}

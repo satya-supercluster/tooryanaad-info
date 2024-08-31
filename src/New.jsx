@@ -1,4 +1,12 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Legend,
+  Tooltip,
+} from "recharts";
 
 const eventsMap = {
   "कवि सम्मेलन": "kaviSammelan",
@@ -16,8 +24,24 @@ const eventsMap = {
   "नुक्कड़ नाटक": "nukkadNatak",
 };
 
-const CompetitionDashboard = ({ data }) => {
-  const { competitionCounts, totalParticipants } = useMemo(() => {
+const COLORS = [
+  "#0088FE",
+  "#00C49F",
+  "#FFBB28",
+  "#FF8042",
+  "#8884D8",
+  "#82CA9D",
+  "#A4DE6C",
+  "#D0ED57",
+  "#FFC658",
+  "#FFD700",
+  "#FF69B4",
+  "#BA55D3",
+  "#20B2AA",
+];
+
+const CompetitionDashboard = ({ data, count, setCount }) => {
+  const { competitionCounts, totalParticipants, pieChartData } = useMemo(() => {
     const counts = {};
     Object.values(eventsMap).forEach((event) => {
       counts[event] = 0;
@@ -32,35 +56,92 @@ const CompetitionDashboard = ({ data }) => {
       });
     });
 
+    const pieData = Object.entries(eventsMap).map(
+      ([hindiName, englishName]) => ({
+        name: hindiName,
+        value: counts[englishName] || 0,
+      })
+    );
+
     return {
       competitionCounts: counts,
       totalParticipants: uniqueParticipants.size,
+      pieChartData: pieData,
     };
   }, [data]);
+
+  useEffect(() => {
+    const totalCount = Object.values(competitionCounts).reduce(
+      (sum, count) => sum + count,
+      0
+    );
+    setCount(totalCount);
+  }, [competitionCounts, setCount]);
 
   return (
     <div className="p-4 bg-slate-300 min-h-screen rounded-lg border-2 border-yellow-500">
       <h1 className="text-3xl font-bold mb-6 text-center text-blue-800">
         प्रतियोगिता प्रतिभागी संख्या
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <div className="bg-blue-500 text-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300 col-span-full">
-          <h2 className="text-xl font-semibold mb-2">कुल व्यक्तिगत भागीदारी</h2>
-          <p className="text-4xl font-bold text-center">{totalParticipants}</p>
-        </div>
-        {Object.entries(eventsMap).map(([hindiName, englishName]) => (
-          <div
-            key={englishName}
-            className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300"
-          >
-            <h2 className="text-lg font-semibold mb-2 text-blue-700">
-              {hindiName}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="space-y-4">
+          <div className="bg-blue-500 text-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
+            <h2 className="text-xl font-semibold mb-2">
+              कुल व्यक्तिगत भागीदारी
             </h2>
-            <p className="text-3xl font-bold text-center text-gray-800">
-              {competitionCounts[englishName] || 0}
+            <p className="text-4xl font-bold text-center">
+              {totalParticipants}
             </p>
           </div>
-        ))}
+          <div className="bg-yellow-500 text-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
+            <h2 className="text-xl font-semibold mb-2">
+              कुल प्रतियोगिता भागीदारी
+            </h2>
+            <p className="text-4xl font-bold text-center">{count}</p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {Object.entries(eventsMap).map(([hindiName, englishName]) => (
+              <div
+                key={englishName}
+                className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300"
+              >
+                <h2 className="text-sm font-semibold mb-2 text-blue-700">
+                  {hindiName}
+                </h2>
+                <p className="text-2xl font-bold text-center text-gray-800">
+                  {competitionCounts[englishName] || 0}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
+          <h2 className="text-xl font-semibold mb-4 text-center text-blue-700">
+            प्रतियोगिता वितरण
+          </h2>
+          <ResponsiveContainer width="100%" height={400}>
+            <PieChart>
+              <Pie
+                data={pieChartData}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                outerRadius={100}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {pieChartData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );
