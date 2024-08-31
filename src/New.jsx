@@ -126,10 +126,7 @@ const CompetitionDashboard = ({ data, count, setCount }) => {
   }, [competitionCounts, setCount]);
 
   return (
-    <div
-      className="p-4 bg-slate-300 min-h-screen rounded-lg border-2 border-yellow-500"
-      ref={ref}
-    >
+    <div className="p-4 min-h-screen rounded-lg" ref={ref}>
       <motion.h1
         className="text-3xl font-bold mb-6 text-center text-blue-800"
         initial={{ opacity: 0, y: -50 }}
@@ -160,7 +157,7 @@ const CompetitionDashboard = ({ data, count, setCount }) => {
               {inView ? <CountUp start={0} end={count} duration={2} /> : count}
             </p>
           </AnimatedDiv>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 ">
             {Object.entries(eventsMap).map(([hindiName, englishName]) => (
               <AnimatedDiv
                 key={englishName}
@@ -184,7 +181,7 @@ const CompetitionDashboard = ({ data, count, setCount }) => {
             ))}
           </div>
         </div>
-        <AnimatedDiv className="bg-white overflow-x-hidden rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
+        <AnimatedDiv className="bg-white overflow-x-hidden rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300 ">
           <h2 className="text-xl font-semibold mb-4 text-center text-blue-700">
             प्रतियोगिता वितरण
           </h2>
@@ -218,7 +215,7 @@ const CompetitionDashboard = ({ data, count, setCount }) => {
           value={passcode}
           onChange={handlePasscodeChange}
           placeholder="Enter passcode"
-          className="m-4 p-2 border-2 rounded border-red-500"
+          className="m-4 p-2 border-2 rounded border-red-500 text-center"
         />
         {passcode === "satyam" ? (
           <Excel data={data} className="p-4" />

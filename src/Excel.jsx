@@ -91,7 +91,7 @@ const Excel = ({ data }) => {
   };
 
   return (
-    <div className="space-y-4 px-4">
+    <div className="space-y-4">
       <button
         onClick={handleDownloadAll}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"

@@ -32,7 +32,7 @@ const App = () => {
 
 
   return (
-    <div className="my-5 min-h-screen min-w-screen text-center flex flex-col justify-center items-center ">
+    <div className="py-5 min-h-screen min-w-screen text-center flex flex-col justify-center items-center bg-slate-300">
       <div className="text-center">
         {combinedData ? (
           <CompetitionDashboard
