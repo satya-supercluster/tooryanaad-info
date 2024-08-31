@@ -76,6 +76,7 @@ const Excel = ({ data }) => {
       .map((item) => ({
         token: item.token,
         name: item.name,
+        teamName:item.teamName || "",
         email: item.email,
         contact: item.contact,
         college: item.college,
