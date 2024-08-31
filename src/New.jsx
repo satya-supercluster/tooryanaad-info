@@ -7,6 +7,9 @@ import {
   Legend,
   Tooltip,
 } from "recharts";
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 
 const eventsMap = {
   "कवि सम्मेलन": "kaviSammelan",
@@ -40,7 +43,46 @@ const COLORS = [
   "#20B2AA",
 ];
 
+// Custom hook for random animation
+const useRandomAnimation = () => {
+  const directions = ["left", "right"];
+  const randomDirection =
+    directions[Math.floor(Math.random() * directions.length)];
+  return {
+    hidden: { opacity: 0, x: randomDirection === "left" ? -100 : 100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12,
+        duration: 0.6,
+      },
+    },
+  };
+};
+
+const AnimatedDiv = ({ children, className }) => {
+  const animation = useRandomAnimation();
+  return (
+    <motion.div
+      variants={animation}
+      initial="hidden"
+      whileInView="visible"
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
 const CompetitionDashboard = ({ data, count, setCount }) => {
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
   const { competitionCounts, totalParticipants, pieChartData } = useMemo(() => {
     const counts = {};
     Object.values(eventsMap).forEach((event) => {
@@ -79,29 +121,43 @@ const CompetitionDashboard = ({ data, count, setCount }) => {
   }, [competitionCounts, setCount]);
 
   return (
-    <div className="p-4 bg-slate-300 min-h-screen rounded-lg border-2 border-yellow-500">
-      <h1 className="text-3xl font-bold mb-6 text-center text-blue-800">
+    <div
+      className="p-4 bg-slate-300 min-h-screen rounded-lg border-2 border-yellow-500"
+      ref={ref}
+    >
+      <motion.h1
+        className="text-3xl font-bold mb-6 text-center text-blue-800"
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         प्रतियोगिता प्रतिभागी संख्या
-      </h1>
+      </motion.h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="space-y-4">
-          <div className="bg-blue-500 text-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
+          <AnimatedDiv className="bg-blue-500 text-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
             <h2 className="text-xl font-semibold mb-2">
               कुल व्यक्तिगत भागीदारी
             </h2>
             <p className="text-4xl font-bold text-center">
-              {totalParticipants}
+              {inView ? (
+                <CountUp start={0} end={totalParticipants} duration={2} />
+              ) : (
+                totalParticipants
+              )}
             </p>
-          </div>
-          <div className="bg-yellow-500 text-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
+          </AnimatedDiv>
+          <AnimatedDiv className="bg-yellow-500 text-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
             <h2 className="text-xl font-semibold mb-2">
               कुल प्रतियोगिता भागीदारी
             </h2>
-            <p className="text-4xl font-bold text-center">{count}</p>
-          </div>
+            <p className="text-4xl font-bold text-center">
+              {inView ? <CountUp start={0} end={count} duration={2} /> : count}
+            </p>
+          </AnimatedDiv>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {Object.entries(eventsMap).map(([hindiName, englishName]) => (
-              <div
+              <AnimatedDiv
                 key={englishName}
                 className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300"
               >
@@ -109,13 +165,21 @@ const CompetitionDashboard = ({ data, count, setCount }) => {
                   {hindiName}
                 </h2>
                 <p className="text-2xl font-bold text-center text-gray-800">
-                  {competitionCounts[englishName] || 0}
+                  {inView ? (
+                    <CountUp
+                      start={0}
+                      end={competitionCounts[englishName] || 0}
+                      duration={2}
+                    />
+                  ) : (
+                    competitionCounts[englishName] || 0
+                  )}
                 </p>
-              </div>
+              </AnimatedDiv>
             ))}
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
+        <AnimatedDiv className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
           <h2 className="text-xl font-semibold mb-4 text-center text-blue-700">
             प्रतियोगिता वितरण
           </h2>
@@ -141,7 +205,7 @@ const CompetitionDashboard = ({ data, count, setCount }) => {
               <Legend />
             </PieChart>
           </ResponsiveContainer>
-        </div>
+        </AnimatedDiv>
       </div>
     </div>
   );
