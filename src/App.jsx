@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import CompetitionDashboard from "./New";
-import Excel from './Excel'
 const App = () => {
   const [combinedData, setCombinedData] = useState(null);
   const [count, setCount] = useState(0);
-  const [passcode, setPasscode] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,31 +29,17 @@ const App = () => {
     fetchData();
   }, []);
 
-  const handlePasscodeChange = (event) => {
-    setPasscode(event.target.value);
-  };
+
 
   return (
     <div className="my-5 min-h-screen min-w-screen text-center flex flex-col justify-center items-center ">
       <div className="text-center">
         {combinedData ? (
-          <div className="flex flex-col">
-            <CompetitionDashboard
-              data={combinedData}
-              count={count}
-              setCount={setCount}
-            />
-            <input
-              type="text"
-              value={passcode}
-              onChange={handlePasscodeChange}
-              placeholder="Enter passcode"
-              className="m-4 p-2 border-2 rounded border-red-500"
-            />
-            {passcode === "satyam" ? (
-              <Excel data={combinedData} className="p-4" />
-            ) : null}
-          </div>
+          <CompetitionDashboard
+            data={combinedData}
+            count={count}
+            setCount={setCount}
+          />
         ) : (
           <p>Loading...</p>
         )}

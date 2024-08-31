@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useEffect,useState } from "react";
 import {
   PieChart,
   Pie,
@@ -10,7 +10,7 @@ import {
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
-
+import Excel from "./Excel";
 const eventsMap = {
   "कवि सम्मेलन": "kaviSammelan",
   "अभिव्यक्ति गायन": "abhivyaktiGayan",
@@ -82,6 +82,11 @@ const CompetitionDashboard = ({ data, count, setCount }) => {
     threshold: 0.1,
     triggerOnce: true,
   });
+  
+  const [passcode, setPasscode] = useState("");
+  const handlePasscodeChange = (event) => {
+    setPasscode(event.target.value);
+  };
 
   const { competitionCounts, totalParticipants, pieChartData } = useMemo(() => {
     const counts = {};
@@ -133,7 +138,7 @@ const CompetitionDashboard = ({ data, count, setCount }) => {
       >
         प्रतियोगिता प्रतिभागी संख्या
       </motion.h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 border-b-2 pb-4 border-violet-500">
         <div className="space-y-4">
           <AnimatedDiv className="bg-blue-500 text-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
             <h2 className="text-xl font-semibold mb-2">
@@ -207,6 +212,20 @@ const CompetitionDashboard = ({ data, count, setCount }) => {
           </ResponsiveContainer>
         </AnimatedDiv>
       </div>
+      <AnimatedDiv className="flex flex-col justify-center items-center">
+        <input
+          type="text"
+          value={passcode}
+          onChange={handlePasscodeChange}
+          placeholder="Enter passcode"
+          className="m-4 p-2 border-2 rounded border-red-500"
+        />
+        {passcode === "satyam" ? (
+          <Excel data={data} className="p-4" />
+        ) : passcode === "" ? null : (
+          <div>PassCode Galat hai</div>
+        )}
+      </AnimatedDiv>
     </div>
   );
 };
