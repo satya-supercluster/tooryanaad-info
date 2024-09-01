@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect,useState } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import {
   PieChart,
   Pie,
@@ -10,8 +10,9 @@ import {
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
-import Excel from "./Excel";
-import { useData } from "./data/DataContext";
+import Excel from "./ExcelData";
+import { useData } from "../data/DataContext";
+import AnimatedDiv from "./AnimatedDiv";
 const eventsMap = {
   "कवि सम्मेलन": "kaviSammelan",
   "अभिव्यक्ति गायन": "abhivyaktiGayan",
@@ -44,51 +45,12 @@ const COLORS = [
   "#20B2AA",
 ];
 
-// Custom hook for random animation
-const useRandomAnimation = () => {
-  const directions = ["left", "right"];
-  const randomDirection =
-    directions[Math.floor(Math.random() * directions.length)];
-  return {
-    hidden: { opacity: 0, x: randomDirection === "left" ? -100 : 100 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12,
-        duration: 0.6,
-      },
-    },
-  };
-};
-
-const AnimatedDiv = ({ children, className }) => {
-  const animation = useRandomAnimation();
-  return (
-    <motion.div
-      variants={animation}
-      initial="hidden"
-      whileInView="visible"
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
 const CompetitionDashboard = ({ data }) => {
   const { count, setCount } = useData();
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true,
   });
-  
-  const [passcode, setPasscode] = useState("");
-  const handlePasscodeChange = (event) => {
-    setPasscode(event.target.value);
-  };
 
   const { competitionCounts, totalParticipants, pieChartData } = useMemo(() => {
     const counts = {};
@@ -130,14 +92,14 @@ const CompetitionDashboard = ({ data }) => {
   return (
     <div className="p-4 min-h-screen rounded-lg" ref={ref}>
       <motion.h1
-        className="text-3xl font-bold mb-6 text-center text-blue-800"
+        className="text-2xl max-sm:text-xl font-extrabold mb-6 text-center text-white"
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         प्रतियोगिता प्रतिभागी संख्या
       </motion.h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 border-b-2 pb-4 border-violet-500">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 border-b-2 pb-4 border-white">
         <div className="space-y-4">
           <AnimatedDiv className="bg-blue-500 text-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
             <h2 className="text-xl font-semibold mb-2">
@@ -212,18 +174,8 @@ const CompetitionDashboard = ({ data }) => {
         </AnimatedDiv>
       </div>
       <AnimatedDiv className="flex flex-col justify-center items-center">
-        <input
-          type="text"
-          value={passcode}
-          onChange={handlePasscodeChange}
-          placeholder="Enter passcode"
-          className="m-4 p-2 border-2 rounded border-red-500 text-center"
-        />
-        {passcode === "satyam" ? (
-          <Excel data={data} className="p-4" />
-        ) : passcode === "" ? null : (
-          <div>PassCode Galat hai</div>
-        )}
+        <div className="my-4 text-xl font-bold text-white">Excel Sheets</div>
+        <Excel data={data} className="p-4" />
       </AnimatedDiv>
     </div>
   );

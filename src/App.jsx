@@ -1,51 +1,38 @@
 import React, { useState, useEffect } from "react";
-import CompetitionDashboard from "./New";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useAuth,AuthProvider } from "./data/AuthContext";
+import { useData,DataProvider } from "./data/DataContext";
+import Layout from "./components/Layout";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import { HashLoader } from "react-spinners";
 const App = () => {
-  const [combinedData, setCombinedData] = useState(null);
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [responseT, responseTG] = await Promise.all([
-          fetch(`${import.meta.env.VITE_BACKEND_SITE}/T`),
-          fetch(`${import.meta.env.VITE_BACKEND_SITE}/TG`),
-        ]);
-
-        if (!responseT.ok || !responseTG.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        const dataT = await responseT.json();
-        const dataTG = await responseTG.json();
-
-        // Combine the data from both endpoints
-        const combined = [...dataT.data, ...dataTG.data];
-        setCombinedData(combined);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-
-
   return (
-    <div className="py-5 min-h-screen min-w-screen text-center flex flex-col justify-center items-center bg-slate-300">
-      <div className="text-center">
-        {combinedData ? (
-          <CompetitionDashboard
-            data={combinedData}
-            count={count}
-            setCount={setCount}
-          />
-        ) : (
-          <p>Loading...</p>
-        )}
-      </div>
+    <AuthProvider>
+      <DataProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<AuthenticatedRoute />} />
+              {/* Other routes */}
+            </Route>
+          </Routes>
+        </Router>
+      </DataProvider>
+    </AuthProvider>
+  );
+};
+const AuthenticatedRoute = () => {
+  const { isLoading } = useData();
+  const { auth } = useAuth();
+  return !auth ? (
+    <Login />
+  ) : !isLoading ? (
+    <Home />
+  ) : (
+    <div className="min-h-screen flex justify-center items-center bg-slate-700">
+      <HashLoader color="#438e96" size={100} />
     </div>
   );
 };
-
 export default App;
