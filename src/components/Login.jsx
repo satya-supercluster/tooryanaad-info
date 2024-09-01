@@ -17,7 +17,7 @@ const Login = () => {
           Tooryanaad Samiti Events Information
         </h1>
         <input
-          type="text"
+          type="password"
           value={passcode}
           onChange={handlePasscodeChange}
           placeholder="Enter passcode"
