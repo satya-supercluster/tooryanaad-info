@@ -31,7 +31,7 @@ const AuthenticatedRoute = () => {
     <Home />
   ) : (
     <div className="min-h-screen flex justify-center items-center bg-slate-700">
-      <HashLoader color="#438e96" size={100} />
+      <HashLoader color="#fff" size={100} />
     </div>
   );
 };
