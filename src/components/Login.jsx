@@ -31,7 +31,7 @@ const Login = () => {
               transition={{ duration: 0.2 }}
               className="text-blue-500 p-2 text-sm lg:text-lg font-semibold my-1 text-center"
             >
-              Passcode Avashyak!
+              PassCode Avashyak!
             </motion.div>
           ) : (
             <motion.div
