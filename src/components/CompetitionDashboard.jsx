@@ -173,10 +173,10 @@ const CompetitionDashboard = ({ data }) => {
           </ResponsiveContainer>
         </AnimatedDiv>
       </div>
-      <AnimatedDiv className="flex flex-col justify-center items-center">
-        <div className="my-4 text-xl font-bold text-white">Excel Sheets</div>
+      <div className="flex flex-col justify-center items-center">
+        <AnimatedDiv className="my-4 text-xl font-bold text-white">Excel Sheets</AnimatedDiv>
         <Excel data={data} className="p-4" />
-      </AnimatedDiv>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import * as XLSX from "xlsx";
+import AnimatedDiv from "./AnimatedDiv";
 
 const Excel = ({ data }) => {
   const competitions = [
@@ -92,21 +93,25 @@ const Excel = ({ data }) => {
 
   return (
     <div className="space-y-4">
-      <button
-        onClick={handleDownloadAll}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
-      >
-        Download All Data
-      </button>
+      <AnimatedDiv>
+        <button
+          onClick={handleDownloadAll}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
+        >
+          Download All Data
+        </button>
+      </AnimatedDiv>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {competitions.map((competition) => (
-          <button
-            key={competition}
-            onClick={() => handleDownloadCompetition(competition)}
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full"
-          >
-            {competition}
-          </button>
+          <AnimatedDiv>
+            <button
+              key={competition}
+              onClick={() => handleDownloadCompetition(competition)}
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full"
+            >
+              {competition}
+            </button>
+          </AnimatedDiv>
         ))}
       </div>
     </div>
