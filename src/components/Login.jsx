@@ -21,10 +21,10 @@ const Login = () => {
           value={passcode}
           onChange={handlePasscodeChange}
           placeholder="Enter passcode"
-          className="w-full max-w-52 px-4 py-2 border-2 rounded-md border-yellow-500 focus:outline-none focus:border-blue-500 font-bold text-slate-700"
+          className="w-full max-w-52 px-4 py-2 border-2 rounded-md border-yellow-500 focus:outline-none focus:border-blue-500 font-bold text-slate-700 text-center"
         />
         {passcode === "" ? null : (
-          <div className="text-red-200 p-2 text-sm font-semibold mt-2 text-center">
+          <div className="text-red-500 p-2 text-sm lg:text-lg font-semibold mt-2 text-center">
             PassCode Galat hai
           </div>
         )}
