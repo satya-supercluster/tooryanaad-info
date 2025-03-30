@@ -14,8 +14,11 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={<AuthenticatedRoute />} />
-              <Route path="/list" element={<RegistrationList />} />
+              <Route index element={<AuthenticatedRoute Element={Home} />} />
+              <Route
+                path="/list"
+                element={<AuthenticatedRoute Element={RegistrationList} />}
+              />
               {/* Other routes */}
             </Route>
           </Routes>
@@ -24,13 +27,13 @@ const App = () => {
     </AuthProvider>
   );
 };
-const AuthenticatedRoute = () => {
+const AuthenticatedRoute = ({Element}) => {
   const { isLoading } = useData();
   const { auth } = useAuth();
   return !auth ? (
     <Login />
   ) : !isLoading ? (
-    <Home />
+    <Element />
   ) : (
     <div className="min-h-screen flex justify-center items-center bg-slate-700">
       <HashLoader color="#fff" size={100} />

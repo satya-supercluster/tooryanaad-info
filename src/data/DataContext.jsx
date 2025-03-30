@@ -64,8 +64,7 @@ export const DataProvider = ({ children }) => {
         setIsLoading(false);
       }
     };
-
-    fetchData();
+    if(auth) fetchData();
   }, [auth]);
 
   return (
