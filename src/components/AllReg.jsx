@@ -19,7 +19,9 @@ const RegistrationList = () => {
       return (
         (reg.name && reg.name.toLowerCase().includes(lowerSearch)) ||
         (reg.token && reg.token.toLowerCase().includes(lowerSearch)) ||
-        (reg.email && reg.email.toLowerCase().includes(lowerSearch))
+        (reg.email && reg.email.toLowerCase().includes(lowerSearch)) ||
+        (reg.contact && reg.contact.includes(search.trim())) ||
+        (reg.scholar && reg.scholar.includes(search.trim()))
       );
     });
 
@@ -57,7 +59,7 @@ const RegistrationList = () => {
       <div className="flex justify-center my-5">
         <input
           type="text"
-          placeholder="Search by name, token, or email..."
+          placeholder="Search by name, token, email, or contact..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:min-w-[300px]"
