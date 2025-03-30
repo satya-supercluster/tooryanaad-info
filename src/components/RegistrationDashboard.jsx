@@ -106,22 +106,24 @@ const RegistrationDashboard = () => {
             {verticals.map((vertical) => (
               <AnimatedDiv
                 key={vertical}
-                className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300"
+                className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300 max-sm:min-w-[40vw]"
               >
-                <h2 className="text-sm font-semibold mb-2 text-green-700">
-                  {vertical}
-                </h2>
-                <p className="text-2xl font-bold text-center text-gray-800">
-                  {inView ? (
-                    <CountUp
-                      start={0}
-                      end={verticalCounts[vertical] || 0}
-                      duration={2}
-                    />
-                  ) : (
-                    verticalCounts[vertical] || 0
-                  )}
-                </p>
+                <div className="flex-col justify-center items-center">
+                  <h2 className="text-sm font-semibold mb-2 text-green-700">
+                    {vertical}
+                  </h2>
+                  <p className="text-2xl font-bold text-center text-gray-800">
+                    {inView ? (
+                      <CountUp
+                        start={0}
+                        end={verticalCounts[vertical] || 0}
+                        duration={2}
+                      />
+                    ) : (
+                      verticalCounts[vertical] || 0
+                    )}
+                  </p>
+                </div>
               </AnimatedDiv>
             ))}
           </div>
@@ -154,8 +156,11 @@ const RegistrationDashboard = () => {
             </PieChart>
           </ResponsiveContainer>
         </AnimatedDiv>
-        <NavLink to="/list" className="p-2 bg-blue-700 text-white rounded-lg shadow-lg">
-            Show Data
+        <NavLink
+          to="/list"
+          className="p-2 bg-blue-700 text-white rounded-lg shadow-lg"
+        >
+          Show Data
         </NavLink>
       </div>
     </div>
