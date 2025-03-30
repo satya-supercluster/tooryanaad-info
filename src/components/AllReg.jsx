@@ -33,9 +33,9 @@ const RegistrationList = () => {
   }, [registrationData, search]);
 
   return (
-    <div className="p-4">
+    <div className="p-4 bg-slate-700">
       <motion.h2
-        className="text-2xl font-bold mb-4 text-center"
+        className="text-2xl font-bold mb-4 text-center text-blue-300"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -44,7 +44,7 @@ const RegistrationList = () => {
       </motion.h2>
 
       {/* Year counts and search bar */}
-      <div className="mb-4 flex flex-col sm:flex-row justify-center items-center">
+      <div className="mb-4 flex flex-col sm:flex-row justify-center items-center text-blue-300">
         <div className="mb-2 sm:mb-0">
           <span className="mr-4">
             Year 1: <strong>{year1Count}</strong>
@@ -60,7 +60,7 @@ const RegistrationList = () => {
           placeholder="Search by name, token, or email..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:min-w-[300px]"
         />
       </div>
       {/* Registration data list */}
