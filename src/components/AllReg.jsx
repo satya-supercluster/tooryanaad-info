@@ -33,7 +33,7 @@ const RegistrationList = () => {
   }, [registrationData, search]);
 
   return (
-    <div className="p-4 bg-slate-700">
+    <div className="p-4 bg-slate-700 min-h-screen">
       <motion.h2
         className="text-2xl font-bold mb-4 text-center text-blue-300"
         initial={{ opacity: 0 }}
