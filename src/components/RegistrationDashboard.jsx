@@ -70,7 +70,17 @@ const RegistrationDashboard = () => {
   }, [registrationData]);
 
   return (
-    <div className="p-4 min-h-screen rounded-lg" ref={ref}>
+    <div className=" min-h-screen rounded-lg" ref={ref}>
+      <h1>
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="text-lg font-bold text-green-500"
+        >
+          आह्वान 25
+        </motion.span>
+      </h1>
       <motion.h1
         className="text-2xl max-sm:text-xl font-extrabold mb-6 text-center text-white"
         initial={{ opacity: 0, y: -50 }}
@@ -144,7 +154,7 @@ const RegistrationDashboard = () => {
             </PieChart>
           </ResponsiveContainer>
         </AnimatedDiv>
-        <NavLink to="/list" className="p-2 bg-blue-700 text-white">
+        <NavLink to="/list" className="p-2 bg-blue-700 text-white rounded-lg shadow-lg">
             Show Data
         </NavLink>
       </div>
