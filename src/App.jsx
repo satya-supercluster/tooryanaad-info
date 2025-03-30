@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useAuth,AuthProvider } from "./data/AuthContext";
 import { useData,DataProvider } from "./data/DataContext";
@@ -6,6 +6,7 @@ import Layout from "./components/Layout";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import { HashLoader } from "react-spinners";
+import RegistrationList from "./components/AllReg";
 const App = () => {
   return (
     <AuthProvider>
@@ -14,6 +15,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<AuthenticatedRoute />} />
+              <Route path="/list" element={<RegistrationList />} />
               {/* Other routes */}
             </Route>
           </Routes>
