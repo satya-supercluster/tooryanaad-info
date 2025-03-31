@@ -72,21 +72,19 @@ const RegistrationDashboard = () => {
 
   return (
     <div className="min-h-screen rounded-lg" ref={ref}>
-      <h1>
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="text-lg font-bold text-green-500"
-        >
-          आह्वान 25
-        </motion.span>
-      </h1>
+      <motion.h1
+        initial={{ opacity: 0, x: 50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.2 }}
+        className="text-lg font-bold py-2 text-green-500"
+      >
+        आह्वान'25
+      </motion.h1>
       <motion.h1
         className="text-2xl max-sm:text-xl font-extrabold mb-6 text-center text-white"
-        initial={{ opacity: 0, y: -50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.2 }}
       >
         पंजीकरण आंकड़े
       </motion.h1>
