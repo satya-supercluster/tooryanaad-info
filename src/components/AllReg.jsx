@@ -37,7 +37,7 @@ const RegistrationList = () => {
   return (
     <div className="p-4 bg-slate-700 min-h-screen">
       <motion.h2
-        className="text-2xl font-bold mb-4 text-center text-blue-300"
+        className="text-2xl font-bold my-4 text-center text-gray-200"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -46,13 +46,13 @@ const RegistrationList = () => {
       </motion.h2>
 
       {/* Year counts and search bar */}
-      <div className="mb-4 flex flex-col sm:flex-row justify-center items-center text-blue-300">
+      <div className="mb-4 flex flex-col  font-semibold sm:flex-row justify-center items-center text-gray-100">
         <div className="mb-2 sm:mb-0">
           <span className="mr-4">
-            Year 1: <strong>{year1Count}</strong>
+            First Year: <strong>{year1Count}</strong>
           </span>
           <span>
-            Year 2: <strong>{year2Count}</strong>
+            Second Year: <strong>{year2Count}</strong>
           </span>
         </div>
       </div>
@@ -62,7 +62,7 @@ const RegistrationList = () => {
           placeholder="Search by name, token, email, or contact..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:min-w-[300px]"
+          className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:min-w-[300px] text-blue-600 font-extrabold"
         />
       </div>
       {/* Registration data list */}
@@ -70,32 +70,34 @@ const RegistrationList = () => {
         {filteredData.map((reg) => (
           <motion.div
             key={reg._id}
-            className="bg-white rounded-lg shadow-md p-4 hover:shadow-xl transition-shadow duration-300"
+            className="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-xl shadow-lg p-5 hover:shadow-2xl transition-shadow duration-300 border border-gray-700"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <h3 className="text-xl font-semibold mb-2">{reg.name}</h3>
+            <h3 className="text-2xl font-bold mb-3 text-cyan-400">
+              {reg.name}
+            </h3>
             <p>
-              <strong>Token:</strong> {reg.token}
+              <strong className="text-purple-400">Token:</strong> {reg.token}
             </p>
             <p>
-              <strong>Email:</strong> {reg.email}
+              <strong className="text-green-400">Email:</strong> {reg.email}
             </p>
             <p>
-              <strong>Year:</strong> {reg.year}
+              <strong className="text-yellow-400">Year:</strong> {reg.year}
             </p>
             <p>
-              <strong>Contact:</strong> {reg.contact}
+              <strong className="text-blue-400">Contact:</strong> {reg.contact}
             </p>
             <p>
-              <strong>Scholar:</strong> {reg.scholar}
+              <strong className="text-pink-400">Scholar:</strong> {reg.scholar}
             </p>
             <p>
-              <strong>Branch:</strong> {reg.branch}
+              <strong className="text-red-400">Branch:</strong> {reg.branch}
             </p>
             <p>
-              <strong>Vertical:</strong>{" "}
+              <strong className="text-orange-400">Vertical:</strong>{" "}
               {reg.vertical && Array.isArray(reg.vertical)
                 ? reg.vertical.join(", ")
                 : ""}
