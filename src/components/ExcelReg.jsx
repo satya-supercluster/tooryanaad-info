@@ -16,6 +16,8 @@ const ExcelReg = ({ data }) => {
   const generateExcel = (sheetData, fileName) => {
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(sheetData);
+    const headers = Object.keys(sheetData[0] || {});
+    ws["!cols"] = headers.map(() => ({ wch: 20 }));
     XLSX.utils.book_append_sheet(wb, ws, "Participants");
 
     const wbout = XLSX.write(wb, { bookType: "xlsx", type: "binary" });
