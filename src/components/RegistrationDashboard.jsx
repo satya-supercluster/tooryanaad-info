@@ -13,6 +13,7 @@ import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 import { useData } from "../data/DataContext";
 import AnimatedDiv from "./AnimatedDiv";
+import ExcelReg from "./ExcelReg";
 
 const verticals = [
   "प्रबंधक",
@@ -70,7 +71,7 @@ const RegistrationDashboard = () => {
   }, [registrationData]);
 
   return (
-    <div className=" min-h-screen rounded-lg" ref={ref}>
+    <div className="min-h-screen rounded-lg" ref={ref}>
       <h1>
         <motion.span
           initial={{ opacity: 0 }}
@@ -156,12 +157,21 @@ const RegistrationDashboard = () => {
             </PieChart>
           </ResponsiveContainer>
         </AnimatedDiv>
-        <NavLink
-          to="/list"
-          className="p-2 bg-blue-700 text-white rounded-lg shadow-lg"
-        >
-          Show Data
-        </NavLink>
+      </div>
+
+      <NavLink
+        to="/list"
+        className="p-2 bg-blue-700 text-white rounded-lg shadow-lg block text-center mt-4"
+      >
+        Show/Search Data
+      </NavLink>
+
+      <hr className="mt-4" />
+      <hr />
+
+      {/* Excel Download Component */}
+      <div className="mt-6">
+        <ExcelReg data={registrationData} />
       </div>
     </div>
   );
