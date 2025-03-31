@@ -76,17 +76,9 @@ const RegistrationDashboard = () => {
         initial={{ opacity: 0, x: 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.2 }}
-        className="text-lg font-bold py-2 text-green-500"
+        className="text-lg font-bold py-5 text-green-500"
       >
         आह्वान'25
-      </motion.h1>
-      <motion.h1
-        className="text-2xl max-sm:text-xl font-extrabold mb-6 text-center text-white"
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.2 }}
-      >
-        पंजीकरण आंकड़े
       </motion.h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 border-b-2 pb-4 border-white">
         {/* Left column: Total count and breakdown cards */}
