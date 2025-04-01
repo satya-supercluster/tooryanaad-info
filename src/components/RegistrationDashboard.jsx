@@ -57,7 +57,11 @@ const RegistrationDashboard = () => {
       }
     });
 
-    const total = registrationData.length;
+    let countOfall=0;
+    verticals.forEach((vertical)=>{
+      countOfall=countOfall+(counts[vertical]||0);
+    })
+
     const pieData = verticals.map((vertical) => ({
       name: vertical,
       value: counts[vertical] || 0,
@@ -65,7 +69,7 @@ const RegistrationDashboard = () => {
 
     return {
       verticalCounts: counts,
-      totalCount: total,
+      totalCount: countOfall,
       pieChartData: pieData,
     };
   }, [registrationData]);
@@ -84,6 +88,16 @@ const RegistrationDashboard = () => {
         {/* Left column: Total count and breakdown cards */}
         <div className="space-y-4">
           <AnimatedDiv className="bg-green-500 text-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
+            <h2 className="text-xl font-semibold mb-2">कुल व्यक्तिगत पंजीकरण</h2>
+            <p className="text-4xl font-bold text-center">
+              {inView ? (
+                <CountUp start={0} end={registrationData.length} duration={2} />
+              ) : (
+                registrationData.length
+              )}
+            </p>
+          </AnimatedDiv>
+          <AnimatedDiv className="bg-blue-500 text-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
             <h2 className="text-xl font-semibold mb-2">कुल पंजीकरण</h2>
             <p className="text-4xl font-bold text-center">
               {inView ? (
