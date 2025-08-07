@@ -46,6 +46,9 @@ const COLORS = [
 ];
 
 const CompetitionDashboard = ({ data }) => {
+
+  
+
   const { count, setCount } = useData();
   const [ref, inView] = useInView({
     threshold: 0.1,
