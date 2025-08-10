@@ -13,6 +13,8 @@ import { motion } from "framer-motion";
 import Excel from "./ExcelData";
 import { useData } from "../data/DataContext";
 import AnimatedDiv from "./AnimatedDiv";
+import { NavLink } from "react-router-dom";
+
 const eventsMap = {
   "कवि सम्मेलन": "kaviSammelan",
   "अभिव्यक्ति गायन": "abhivyaktiGayan",
@@ -177,9 +179,19 @@ const CompetitionDashboard = ({ data }) => {
         </AnimatedDiv>
       </div>
       <div className="flex flex-col justify-center items-center">
-        <AnimatedDiv className="my-4 text-xl font-bold text-white">Excel Sheets</AnimatedDiv>
+        <AnimatedDiv className="my-4 text-xl font-bold text-white">
+          Excel Sheets
+        </AnimatedDiv>
         <Excel data={data} className="p-4" />
       </div>
+      <NavLink 
+      to="/list"
+      className="flex flex-col justify-center items-center"
+      >
+        <AnimatedDiv className="my-4 text-xl font-bold text-white">
+          Search User Data
+        </AnimatedDiv>
+      </NavLink>
     </div>
   );
 };
