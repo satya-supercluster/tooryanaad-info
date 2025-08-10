@@ -188,7 +188,7 @@ const CompetitionDashboard = ({ data }) => {
       to="/list"
       className="flex flex-col justify-center items-center"
       >
-        <AnimatedDiv className="my-4 text-xl font-bold text-white">
+        <AnimatedDiv className="my-4 text-xl font-bold text-white bg-lime-800">
           Search User Data
         </AnimatedDiv>
       </NavLink>
