@@ -6,8 +6,8 @@ import Layout from "./components/Layout";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import { HashLoader } from "react-spinners";
-// import RegistrationList from "./components/AllReg";
-import CompetitionList from "./components/CompetitionList"
+import RegistrationList from "./components/AllReg";
+// import CompetitionList from "./components/CompetitionList"
 const App = () => {
   return (
     <AuthProvider>
@@ -18,8 +18,9 @@ const App = () => {
               <Route index element={<AuthenticatedRoute Element={Home} />} />
               <Route
                 path="/list"
-                element={<AuthenticatedRoute Element={CompetitionList} />}
+                element={<AuthenticatedRoute Element={RegistrationList} />}
               />
+             
               {/* Other routes */}
             </Route>
           </Routes>

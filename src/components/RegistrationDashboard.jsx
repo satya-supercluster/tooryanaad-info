@@ -19,6 +19,7 @@ const verticals = [
   "प्रबंधक",
   "अभिकल्पक",
   "वेब अभिकल्पक",
+  "प्रयोजन प्रबन्धक",
   "छायाकार",
   "सम्पादक",
   "हिन्दीतर भाषी",
@@ -82,7 +83,7 @@ const RegistrationDashboard = () => {
         transition={{ duration: 0.2 }}
         className="text-lg font-bold py-5 text-green-500"
       >
-        आह्वान'25
+        आह्वान'26
       </motion.h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 border-b-2 pb-4 border-white">
         {/* Left column: Total count and breakdown cards */}
